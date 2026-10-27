@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "title": "Fictional order scenario for a hypothetical B2B systems-design exercise",
+    "fictional": true,
+    "notice": "Every name, identifier, date, price, and quantity is invented for illustration. Nothing here is a measured company fact or taken from a real system.",
+    "snapshot_at": "2026-03-20T17:00:00Z",
+    "timestamp_format": "ISO 8601, UTC",
+    "currency": "USD",
+    "quantity_unit": "unit (one centrifuge)",
+    "derived_fields_note": "Fields named in 'derived_from' are computed, not entered. 'basis' marks each value as observed, estimated, or derived. Cancellations and returns are out of scope in this version.",
+    "seller": "Northgate Lab Supply (fictional distributor)"
+  },
+
+  "account": {
+    "owned_by": "crm",
+    "account_id": "ACC-001",
+    "name": "Harbor Valley Testing Co. (fictional)",
+    "segment": "regional testing laboratory"
+  },
+
+  "product": {
+    "sku": "LAB-CF-200",
+    "description": "Benchtop centrifuge, model 200 (fictional, non-branded)",
+    "unit_price": 1850.00
+  },
+
+  "lead": {
+    "owned_by": "crm",
+    "lead_id": "LEAD-0001",
+    "captured_at": "2026-03-02T14:00:00Z",
+    "source": "website enquiry form",
+    "status": "converted_to_opportunity",
+    "account_id": "ACC-001"
+  },
+
+  "opportunity": {
+    "owned_by": "crm",
+    "opportunity_id": "OPP-1001",
+    "account_id": "ACC-001",
+    "created_at": "2026-03-03T09:30:00Z",
+    "stage": "closed_won",
+    "closed_at": "2026-03-10T11:00:00Z",
+    "expected_amount_at_creation": { "value": 7400.00, "basis": "estimated" },
+    "closed_won_amount": { "value": 3700.00, "basis": "derived", "derived_from": "SO-3001" },
+    "note": "The opportunity is won once, with the amount of the accepted order. The 2 unconverted quoted units do not make it a larger or second win."
+  },
+
+  "quote": {
+    "owned_by": "quotation",
+    "quote_id": "QUO-2001",
+    "version": 1,
+    "opportunity_id": "OPP-1001",
+    "quote_requested_at": "2026-03-03T09:00:00Z",
+    "issued_at": "2026-03-04T15:00:00Z",
+    "valid_until": "2026-03-18T23:59:59Z",
+    "status": "partially_accepted",
+    "lines": [
+      {
+        "quote_line_id": "QL-2001-1",
+        "sku": "LAB-CF-200",
+        "quoted_quantity": 4,
+        "unit_price": 1850.00,
+        "quoted_amount": 7400.00,
+        "converted_quantity": { "value": 2, "basis": "derived", "derived_from": "OL-3001-1" },
+        "unconverted_quantity": { "value": 2, "basis": "derived", "derived_from": "quoted_quantity - converted_quantity" },
+        "reserves_stock": false
+      }
+    ]
+  },
+
+  "sales_order": {
+    "owned_by": "orders",
+    "order_id": "SO-3001",
+    "account_id": "ACC-001",
+    "opportunity_id": "OPP-1001",
+    "quote_id": "QUO-2001",
+    "accepted_at": "2026-03-10T11:00:00Z",
+    "status": "partially_fulfilled",
+    "lines": [
+      {
+        "order_line_id": "OL-3001-1",
+        "quote_line_id": "QL-2001-1",
+        "sku": "LAB-CF-200",
+        "ordered_quantity": 2,
+        "unit_price": 1850.00,
+        "ordered_amount": 3700.00,
+        "shipped_quantity": 1,
+        "remaining_order_quantity": 1,
+        "remaining_order_quantity_basis": "derived: ordered_quantity - shipped_quantity",
+        "estimated_ship_date": { "value": "2026-03-30", "basis": "estimated", "reason": "PO-5001 expected receipt (2026-03-27) plus one business day" }
+      }
+    ]
+  },
+
+  "inventory": {
+    "owned_by": "inventory_fulfillment",
+    "sku": "LAB-CF-200",
+    "warehouse_id": "WH-MAIN",
+    "stock_history": [
+      { "at": "2026-03-09T00:00:00Z", "on_hand": 1, "reserved": 0, "available_to_promise": 1, "event": "before order acceptance; QUO-2001 has been issued but holds no stock" },
+      { "at": "2026-03-10T11:05:00Z", "on_hand": 1, "reserved": 1, "available_to_promise": 0, "event": "RSV-6001 created for OL-3001-1 after SO-3001 acceptance" },
+      { "at": "2026-03-13T16:00:00Z", "on_hand": 0, "reserved": 0, "available_to_promise": 0, "event": "SHP-4001 shipped; RSV-6001 consumed" }
+    ],
+    "at_snapshot": { "on_hand": 0, "reserved": 0, "available_to_promise": 0, "available_to_promise_basis": "derived: on_hand - reserved" }
+  },
+
+  "reservations": [
+    {
+      "owned_by": "inventory_fulfillment",
+      "reservation_id": "RSV-6001",
+      "order_line_id": "OL-3001-1",
+      "warehouse_id": "WH-MAIN",
+      "reserved_quantity": 1,
+      "created_at": "2026-03-10T11:05:00Z",
+      "status": "consumed_by_shipment",
+      "consumed_by": "SHP-4001"
+    }
+  ],
+
+  "shipments": [
+    {
+      "owned_by": "inventory_fulfillment",
+      "shipment_id": "SHP-4001",
+      "shipped_at": "2026-03-13T16:00:00Z",
+      "carrier": "Example Freight (fictional)",
+      "lines": [ { "order_line_id": "OL-3001-1", "shipped_quantity": 1 } ],
+      "estimated_delivery_date": { "value": "2026-03-17", "basis": "estimated" },
+      "delivery_confirmed_at": { "value": "2026-03-17T10:20:00Z", "basis": "observed" },
+      "delivery_confirmed_quantity": 1
+    }
+  ],
+
+  "inbound_supply": [
+    {
+      "owned_by": "inventory_fulfillment",
+      "purchase_order_id": "PO-5001",
+      "sku": "LAB-CF-200",
+      "warehouse_id": "WH-MAIN",
+      "expected_quantity": 2,
+      "expected_receipt_date": "2026-03-27",
+      "eta_status": "estimated",
+      "actual_receipt_date": null,
+      "actual_receipt_note": "null means not yet received (unknown). It is not the same as zero units received or a zero-day ETA."
+    }
+  ],
+
+  "invoices": [
+    {
+      "owned_by": "billing_optional",
+      "invoice_id": "INV-7001",
+      "order_id": "SO-3001",
+      "issued_at": "2026-03-16T09:00:00Z",
+      "lines": [ { "order_line_id": "OL-3001-1", "invoiced_quantity": 1, "amount": 1850.00 } ],
+      "payment_status": "unpaid",
+      "due_date": "2026-04-15"
+    }
+  ],
+
+  "demand_signals": {
+    "owned_by": "reporting",
+    "note": "A reporting view built from the records above. Only committed order quantity counts as committed demand; the quote line is a signal that is linked to it, not added to it.",
+    "rows": [
+      { "source_id": "QL-2001-1", "kind": "quote_signal", "quantity": 4, "counts_toward_committed_demand": false },
+      { "source_id": "OL-3001-1", "kind": "committed_order", "quantity": 2, "counts_toward_committed_demand": true, "derived_from": "QL-2001-1" }
+    ],
+    "committed_demand_units": 2
+  },
+
+  "quantity_summary_at_snapshot": {
+    "quoted_quantity": 4,
+    "ordered_quantity": 2,
+    "shipped_quantity": 1,
+    "remaining_order_quantity": 1,
+    "unconverted_quote_quantity": 2,
+    "reserved_quantity_open": 0,
+    "on_hand_quantity": 0,
+    "inbound_expected_quantity": 2
+  },
+
+  "changed_condition_walkthrough": {
+    "title": "The remaining unit ships",
+    "hypothetical": true,
+    "assumption": "PO-5001 arrives three days after its estimate; the new stock is reserved for OL-3001-1 and shipped the next day.",
+    "events": [
+      { "at": "2026-03-30T08:30:00Z", "event": "PO-5001 received (observed); replaces the estimated 2026-03-27 date", "on_hand_after": 2, "reserved_after": 0 },
+      { "at": "2026-03-30T08:45:00Z", "event": "RSV-6002 reserves 1 unit for OL-3001-1", "on_hand_after": 2, "reserved_after": 1 },
+      { "at": "2026-03-31T15:00:00Z", "event": "SHP-4002 ships 1 unit against OL-3001-1; RSV-6002 consumed", "on_hand_after": 1, "reserved_after": 0 },
+      { "at": "2026-04-01T09:00:00Z", "event": "INV-7002 issued for the second shipped unit (optional step)", "on_hand_after": 1, "reserved_after": 0 }
+    ],
+    "after": {
+      "order_status": "fulfilled",
+      "quoted_quantity": 4,
+      "ordered_quantity": 2,
+      "shipped_quantity": 2,
+      "remaining_order_quantity": 0,
+      "unconverted_quote_quantity": 2,
+      "committed_demand_units": 2,
+      "reserved_quantity_open": 0,
+      "on_hand_quantity": 1
+    },
+    "unchanged": ["quoted_quantity", "ordered_quantity", "unconverted_quote_quantity", "committed_demand_units"],
+    "changed": ["shipped_quantity", "remaining_order_quantity", "order_status", "on_hand_quantity"]
+  },
+
+  "illustrative_cohort": {
+    "note": "A tiny invented set of opportunities used only to show metric denominators in docs/business-metrics.md. The first row is the scenario above; the others are invented.",
+    "period_start": "2026-03-01T00:00:00Z",
+    "snapshot_at": "2026-03-20T17:00:00Z",
+    "rows": [
+      {
+        "quote_id": "QUO-2001", "opportunity_id": "OPP-1001", "order_id": "SO-3001",
+        "quote_requested_at": "2026-03-03T09:00:00Z", "quote_issued_at": "2026-03-04T15:00:00Z",
+        "quote_outcome": "partially_accepted", "quoted_quantity": 4, "ordered_quantity": 2, "shipped_quantity": 1,
+        "opportunity_outcome": "won", "opportunity_closed_at": "2026-03-10T11:00:00Z"
+      },
+      {
+        "quote_id": "QUO-2002", "opportunity_id": "OPP-1002", "order_id": "SO-3002",
+        "quote_requested_at": "2026-03-05T10:00:00Z", "quote_issued_at": "2026-03-06T10:00:00Z",
+        "quote_outcome": "accepted", "quoted_quantity": 3, "ordered_quantity": 3, "shipped_quantity": 3,
+        "opportunity_outcome": "won", "opportunity_closed_at": "2026-03-12T10:00:00Z"
+      },
+      {
+        "quote_id": "QUO-2003", "opportunity_id": "OPP-1003", "order_id": null,
+        "quote_requested_at": "2026-03-09T13:00:00Z", "quote_issued_at": "2026-03-10T09:00:00Z",
+        "quote_outcome": "lost", "quoted_quantity": 5, "ordered_quantity": 0, "shipped_quantity": 0,
+        "opportunity_outcome": "lost", "opportunity_closed_at": "2026-03-17T09:00:00Z"
+      },
+      {
+        "quote_id": "QUO-2004", "opportunity_id": "OPP-1004", "order_id": null,
+        "quote_requested_at": null, "quote_issued_at": "2026-03-12T14:00:00Z",
+        "quote_outcome": "open", "quoted_quantity": 2, "ordered_quantity": 0, "shipped_quantity": 0,
+        "opportunity_outcome": "open", "opportunity_closed_at": null
+      },
+      {
+        "quote_id": "QUO-2005", "opportunity_id": "OPP-1005", "order_id": null,
+        "quote_requested_at": "2026-03-16T08:00:00Z", "quote_issued_at": "2026-03-17T14:00:00Z",
+        "quote_outcome": "lost", "quoted_quantity": 6, "ordered_quantity": 0, "shipped_quantity": 0,
+        "opportunity_outcome": "lost", "opportunity_closed_at": "2026-03-19T09:00:00Z"
+      }
+    ]
+  }
+}
