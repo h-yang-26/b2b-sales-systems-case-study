@@ -69,7 +69,7 @@ python -m unittest discover -s tests -v
 - `scripts/check_docs.py` checks that local Markdown links resolve, that identifiers in the documents exist in the JSON (and vice versa), that Mermaid fences are closed, and that the documents state the scenario's key quantities.
 - `tests/test_scenario_calc.py` tests the calculation functions, including edge and error cases.
 
-Outputs are printed to the terminal only; nothing is written to disk. Run the commands above in your environment to reproduce results. Tested by an agent on Ubuntu 24.04 with Python 3.13.18 (2026-10-29): both scripts pass and all 30 tests pass. I also ran these commands in PowerShell on Windows during the first review round. macOS has not been tested.
+Outputs are printed to the terminal only; nothing is written to disk. Run the commands above in your environment to reproduce results. Tested by Claude on Ubuntu 24.04 with Python 3.13.18 (2026-10-29): both scripts pass and all 30 tests pass. I also ran these commands in PowerShell on Windows during the first review round. macOS has not been tested.
 
 The Mermaid diagrams are rendered by GitHub in Markdown. Both were previously rendered with Mermaid 10.9.1 in a Chromium-based browser; GitHub rendering should be checked independently.
 
@@ -93,7 +93,7 @@ This is future work. None of it exists in this repository, and nothing here clai
 
 ## How this was built
 
-All data in this project is fictional, and the results say nothing about my employer’s systems. The case study was produced independently of my employer: AI tools produced the documents, fictional scenario and checking scripts under my direction, and I approved the results. [How these were built](https://h-yang-26.github.io/how-these-were-built/) on the portfolio site explains who decided what and how the results were checked.
+All data in this project is fictional, and the results say nothing about my employer’s systems. The case study was produced independently of my employer: ChatGPT and Claude helped with design and planning, Codex and Claude Code produced the documents, fictional scenario and checking scripts under my direction, and I made the judgment calls and approved the results. [How these were built](https://h-yang-26.github.io/how-these-were-built/) on the portfolio site explains who decided what and how the results were checked.
 
 ## Attribution and licensing
 
