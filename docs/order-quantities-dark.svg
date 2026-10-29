@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 312" width="760" height="312" role="img" aria-labelledby="t">
+<title id="t">Quoted, ordered and shipped units for one fictional order</title>
+<defs>
+</defs>
+<rect width="760" height="312" fill="#191C1F"/>
+<g font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+<text x="24" y="59" font-size="19" fill="#E9E7E2" font-weight="700">Quoted</text>
+<rect x="150" y="24" width="56" height="56" rx="8" fill="#8CC0EA"/>
+<rect x="220" y="24" width="56" height="56" rx="8" fill="#8CC0EA"/>
+<rect x="290" y="24" width="56" height="56" rx="8" fill="#8CC0EA"/>
+<rect x="360" y="24" width="56" height="56" rx="8" fill="#8CC0EA"/>
+<text x="440" y="58" font-size="15" fill="#A9AEB5">4 units offered</text>
+<text x="24" y="137" font-size="19" fill="#E9E7E2" font-weight="700">Ordered</text>
+<rect x="150" y="102" width="56" height="56" rx="8" fill="#8CC0EA"/>
+<rect x="220" y="102" width="56" height="56" rx="8" fill="#8CC0EA"/>
+<rect x="290" y="102" width="56" height="56" rx="8" fill="#191C1F" stroke="#848D98" stroke-width="2" stroke-dasharray="6 4"/>
+<rect x="360" y="102" width="56" height="56" rx="8" fill="#191C1F" stroke="#848D98" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="440" y="136" font-size="15" fill="#A9AEB5">2 committed, 2 not converted</text>
+<text x="24" y="215" font-size="19" fill="#E9E7E2" font-weight="700">Shipped</text>
+<rect x="150" y="180" width="56" height="56" rx="8" fill="#6FCDC2"/>
+<rect x="220" y="180" width="56" height="56" rx="8" fill="#191C1F" stroke="#E6B15C" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="440" y="214" font-size="15" fill="#A9AEB5">1 shipped, 1 still owed</text>
+<text x="24" y="272" font-size="15" fill="#A9AEB5">One square = one unit. Unconverted quote units are not demand.</text>
+<text x="24" y="292" font-size="15" fill="#A9AEB5">Remaining quantity = ordered − shipped = 1 unit.</text>
+</g></svg>
